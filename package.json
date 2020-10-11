@@ -1,0 +1,20 @@
+{
+  "name": "family_tree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navtrip/family_tree.git"
+  },
+  "author": "navneet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/navtrip/family_tree/issues"
+  },
+  "homepage": "https://github.com/navtrip/family_tree#readme"
+}
