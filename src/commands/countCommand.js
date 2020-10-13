@@ -21,12 +21,12 @@ class countCommand{
         while(queue.length){
             let pname = queue[0];
             queue.shift();
-            if(this.Family.family_graph[pname] && this.Family.family_graph[pname]['daughter'].length){
+            if(this.Family.family_graph[pname] && this.Family.family_graph[pname]['daughter'] && this.Family.family_graph[pname]['daughter'].length){
                 countdaughters += this.Family.family_graph[pname]['daughter'].length;
                 daughters = daughters.concat(this.Family.family_graph[pname]['daughter'])
-                queue.concat(this.Family.family_graph[pname]['daughter']);
-            }else if(this.Family.family_graph[pname] && this.Family.family_graph[pname]['son'].length){
-                queue.concat(this.Family.family_graph[pname]['son']);
+                queue = queue.concat(this.Family.family_graph[pname]['daughter']);
+            }else if(this.Family.family_graph[pname] && this.Family.family_graph[pname]['son'] && this.Family.family_graph[pname]['son'].length){
+                queue = queue.concat(this.Family.family_graph[pname]['son']);
             }
         }
         console.log(daughters);

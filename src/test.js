@@ -56,7 +56,9 @@ let test_commands = [
     "connect Richard as son of Judith",
     "connect Thomas as son of Judith",
     "count sons of William",
-    "count sons of John shakespeare"
+    "count sons of John shakespeare",
+    "count all daughters of Mary Arden",
+    "count all daughters of Anne Hathaway"
 
 ];
 module.exports.test = ()=>{
