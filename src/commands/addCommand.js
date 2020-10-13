@@ -1,16 +1,20 @@
-const
-    Family = require('./../models/family'),
-    Person = require('./../models/person'),
-    Relation = require('./../models/relation');
+
 class addCommand{
+    Family = require('./../models/family');
+    Person = require('./../models/person');
+    Relation = require('./../models/relation');
     constructor(){
     this.addPerson = (person)=>{
-        Person[person.name] = person;
+        this.Person.add(person);
+        console.log(this.Person)
         return true;
     };
-    this.allRelationship = (relation)=>{
-        Relation[relation] = true;
+    this.addRelationship = (relation)=>{
+        this.Relation.add(relation);
+        console.log(this.Relation)
         return true;
     }
     }
 }
+
+module.exports = addCommand;

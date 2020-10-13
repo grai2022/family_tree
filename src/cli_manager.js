@@ -2,24 +2,31 @@ const
     CONF = require('./config'),
     countCommand = require('./commands/countCommand'),
     addCommand = require('./commands/addCommand'),
-    connectCommand = require('./commands/countCommand');
+    connectCommand = require('./commands/connectCommand');
 module.exports  = (input) =>{
     const
         params    = input.split(' '),
         commandType = params[0].toLowerCase(),
-        subCommand = [params[1].toLowerCase(),params[2].toLowerCase(),params[3].toLowerCase()];
+        subCommand = [params[1].toLowerCase()];
 
     //Validate
     if(commandType in CONF.ALLOWED_CMD && CONF.ALLOWED_CMD[commandType]){
-        let commandConfig = CONF.ALLOWED_CMD[commandType];
         let commandExe ;
         let commandOut;
         //Instantiation Factory Pattern
         if(commandType === "count"){
                 commandExe = new countCommand();
-                if(subCommand[0] === "sons" && subCommand[1] === "of"){
+                if(input.match(/sons of/gm)){
+                    let person ={};
+                    let personFrom = input.indexOf(" of ") + " of ".length;
+                    person.name = input.substr(personFrom);
+                    //execute
                     commandOut = commandExe.findSonsOf(person);
-                }else if(subCommand[0] === "all" && subCommand[1]  =="daughters" && subCommand[2] === "of"){
+                }else if(input.match(/all daughters of/gm)){
+                    let person ={};
+                    let personFrom = input.indexOf(" of ") + " of ".length;
+                    person.name = input.substr(personFrom);
+                    //execute
                     commandOut = commandExe.findAllDaughtersOf(person);
                 } else{
                     return new Error(input.toString());
@@ -27,11 +34,32 @@ module.exports  = (input) =>{
         }else if(commandType == "add" ){
             commandExe = new addCommand();
             if(commandType == "add" && subCommand[0] === "relationship"){
-                commandOut = commandExe.allRelationship(person);
+                let relation = {};
+                let relationshipFrom = input.indexOf(" relationship ") + " relationship ".length;
+                relation.name = input.substr(relationshipFrom);
+                commandOut = commandExe.addRelationship(relation);
             }else{
+                let person = {};
+                console.log("input",input);
+                let personFrom = input.indexOf("add ") + "add ".length;
+                person.name = input.substr(personFrom);
                 commandOut = commandExe.addPerson(person);
             }
         }else if(commandType == "connect" && input.match(/^.*?\bas\b.*?\bof\b.*?$/m)){
+            //parse command => {}
+            let connection={};
+            let op1From = input.indexOf("connect ") + "connect ".length;
+            let op1To = input.lastIndexOf(" as ");
+            connection.op1 = input.substr(op1From, op1To - op1From);
+
+            let relationFrom = input.indexOf("as ") + "as ".length;
+            let relationTo = input.lastIndexOf(" of ");
+            connection.relation = input.substr(relationFrom, relationTo - relationFrom);
+
+            let op2From = input.indexOf(" of ") + " of ".length;
+            connection.op2 = input.substr(op2From);
+
+            //execute
             commandExe = new connectCommand();
             commandOut = commandExe.connect(connection)
         }else{
