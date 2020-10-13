@@ -1,6 +1,18 @@
 # family_tree
 
+Install Dependencies
+>>npm install
+
+Run APP with seeded data
+>> npm start
+
+
+>> run CLI direct
 node index.js
+
+>> run test
+npm test
+
 >>add p1
 input add p1
 { Person: { p1: { name: 'p1' } }, add: [Function: add] }
