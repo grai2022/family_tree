@@ -38,12 +38,14 @@ module.exports  = (input) =>{
                 let relationshipFrom = input.indexOf(" relationship ") + " relationship ".length;
                 relation.name = input.substr(relationshipFrom);
                 commandOut = commandExe.addRelationship(relation);
-            }else{
+            }else if(subCommand[0] === "person"){
                 let person = {};
-                console.log("input",input);
-                let personFrom = input.indexOf("add ") + "add ".length;
+                // console.log("input",input);
+                let personFrom = input.indexOf(" person ") + " person ".length;
                 person.name = input.substr(personFrom);
                 commandOut = commandExe.addPerson(person);
+            } else{
+                return new Error(input.toString());
             }
         }else if(commandType == "connect" && input.match(/^.*?\bas\b.*?\bof\b.*?$/m)){
             //parse command => {}
@@ -52,7 +54,7 @@ module.exports  = (input) =>{
             let op1To = input.lastIndexOf(" as ");
             connection.op1 = input.substr(op1From, op1To - op1From);
 
-            let relationFrom = input.indexOf("as ") + "as ".length;
+            let relationFrom = input.indexOf(" as ") + " as ".length;
             let relationTo = input.lastIndexOf(" of ");
             connection.relation = input.substr(relationFrom, relationTo - relationFrom);
 

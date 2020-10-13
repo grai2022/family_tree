@@ -10,21 +10,26 @@ class countCommand{
     };
     this.findAllDaughtersOf = (person)=>{
         let daughters = this.Family.family_graph[person.name] && this.Family.family_graph[person.name]['daughter'] || [];
-        var countdaughters =0;
+        var countdaughters =daughters.length;
         let queue =[];//to traverse the tree
-        let visited ={};// to avoid the repetetion
-        queue.concat(daughters);
-        visited[person.name] = true;
+        // let visited ={};// to avoid the repetetion
+        let sons = this.Family.family_graph[person.name] && this.Family.family_graph[person.name]['son'] || [];
+        queue = queue.concat(daughters);
+        queue = queue.concat(sons);
+        // console.log(queue);
+        // visited[person.name] = true;
         while(queue.length){
             let pname = queue[0];
             queue.shift();
-            if(pname in visited){
-                continue;
-            }else{
-                countdaughters++;
-                queue.concat(this.Family.family_graph[pname] && this.Family.family_graph[pname]['daughter'] || []);
+            if(this.Family.family_graph[pname] && this.Family.family_graph[pname]['daughter'].length){
+                countdaughters += this.Family.family_graph[pname]['daughter'].length;
+                daughters = daughters.concat(this.Family.family_graph[pname]['daughter'])
+                queue.concat(this.Family.family_graph[pname]['daughter']);
+            }else if(this.Family.family_graph[pname] && this.Family.family_graph[pname]['son'].length){
+                queue.concat(this.Family.family_graph[pname]['son']);
             }
         }
+        console.log(daughters);
         return countdaughters;
     }
     }

@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/navtrip/family_tree/issues"
   },
-  "homepage": "https://github.com/navtrip/family_tree#readme"
+  "homepage": "https://github.com/navtrip/family_tree#readme",
+  "dependencies": {
+    "readline": "^1.3.0"
+  }
 }

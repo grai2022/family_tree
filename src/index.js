@@ -1,6 +1,8 @@
 const
-    cli_manager = require('./cli_manager')
+    cli_manager = require('./cli_manager'),
+    seed = require('./test');
 
+    seed.test();
     cli = require('readline').createInterface({
       input: process.stdin,
       output: process.stdout
