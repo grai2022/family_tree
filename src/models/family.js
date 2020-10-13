@@ -1,6 +1,6 @@
 module.exports ={
     family_graph :{},
-    //{p1:{r1:[],r2:[]}}
+    //{p1:{r1:[p2,p3],r2:[p4,p5]}}
     add :function(connection){
         if(connection.op2 in this.family_graph){
             connection.relation in this.family_graph[connection.op2]? 

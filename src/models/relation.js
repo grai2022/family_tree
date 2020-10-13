@@ -1,5 +1,5 @@
 //{r1:true
-// }}
+// }
 
 module.exports ={
     Relation:{},
